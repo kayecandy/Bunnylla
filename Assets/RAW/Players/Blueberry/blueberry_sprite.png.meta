@@ -1,0 +1,208 @@
+fileFormatVersion: 2
+guid: 86dfeeeb2bf515d4cae1547ef4b06d54
+timeCreated: 1459454167
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: sprite_0
+    21300002: sprite_1
+    21300004: sprite_2
+    21300006: blueberry_sprite_0
+    21300008: blueberry_sprite_1
+    21300010: blueberry_sprite_2
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: blueberry_sprite_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 266.66666
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 76.5, y: -250}
+        - {x: 89.5, y: -218}
+        - {x: 74.5, y: -195}
+        - {x: 89.5, y: -185}
+        - {x: 100.5, y: -176}
+        - {x: 114.5, y: -161}
+        - {x: 130.5, y: -142}
+        - {x: 131.5, y: -130}
+        - {x: 131.5, y: -56}
+        - {x: 119.5, y: 7}
+        - {x: 105.5, y: 51}
+        - {x: 71.5, y: 83}
+        - {x: 84.5, y: 131}
+        - {x: 79.5, y: 203}
+        - {x: 56.5, y: 242}
+        - {x: 46.5, y: 250}
+        - {x: 18.5, y: 250}
+        - {x: 0.5, y: 213}
+        - {x: -8.5, y: 233}
+        - {x: -21.5, y: 250}
+        - {x: -50.5, y: 250}
+        - {x: -71.5, y: 216}
+        - {x: -81.5, y: 195}
+        - {x: -86.5, y: 127}
+        - {x: -74.5, y: 86}
+        - {x: -110.5, y: 49}
+        - {x: -133.5, y: -28}
+        - {x: -133.5, y: -127}
+        - {x: -120.5, y: -157}
+        - {x: -96.5, y: -184}
+        - {x: -64.5, y: -198}
+        - {x: -80.5, y: -212}
+        - {x: -77.5, y: -244}
+        - {x: -64.5, y: -250}
+        - {x: -25.5, y: -250}
+        - {x: -8.5, y: -234}
+        - {x: -14.5, y: -204}
+        - {x: 26.5, y: -250}
+    - name: blueberry_sprite_1
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 0
+        width: 266.66663
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 119.5, y: -157}
+        - {x: 132.5, y: -125}
+        - {x: 132.5, y: -64}
+        - {x: 124.5, y: 9}
+        - {x: 98.5, y: 65}
+        - {x: 73.5, y: 84}
+        - {x: 78.5, y: 115}
+        - {x: 81.5, y: 130}
+        - {x: 83.5, y: 187}
+        - {x: 64.5, y: 242}
+        - {x: 57.5, y: 250}
+        - {x: 33.5, y: 250}
+        - {x: 29.5, y: 249}
+        - {x: 25.5, y: 234}
+        - {x: 22.5, y: 218}
+        - {x: 4.5, y: 243}
+        - {x: -1.5, y: 250}
+        - {x: -29.5, y: 250}
+        - {x: -39.5, y: 237}
+        - {x: -60.5, y: 198}
+        - {x: -64.5, y: 126}
+        - {x: -55.5, y: 90}
+        - {x: -75.5, y: 78}
+        - {x: -98.5, y: 58}
+        - {x: -120.5, y: 8}
+        - {x: -130.5, y: -47}
+        - {x: -130.5, y: -104}
+        - {x: -129.5, y: -118}
+        - {x: -113.5, y: -150}
+        - {x: -92.5, y: -178}
+        - {x: -44.5, y: -198}
+        - {x: -37.5, y: -243}
+        - {x: -28.5, y: -250}
+        - {x: 48.5, y: -250}
+        - {x: 61.5, y: -245}
+        - {x: 71.5, y: -229}
+        - {x: 68.5, y: -207}
+    - name: blueberry_sprite_2
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 0
+        width: 266.66666
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 67.5, y: -233}
+        - {x: 124.5, y: -215}
+        - {x: 120.5, y: -179}
+        - {x: 105.5, y: -169}
+        - {x: 131.5, y: -127}
+        - {x: 132.5, y: -115}
+        - {x: 132.5, y: -37}
+        - {x: 113.5, y: 45}
+        - {x: 96.5, y: 72}
+        - {x: 68.5, y: 94}
+        - {x: 68.5, y: 140}
+        - {x: 58.5, y: 184}
+        - {x: 38.5, y: 226}
+        - {x: 22.5, y: 233}
+        - {x: 1.5, y: 233}
+        - {x: -5.5, y: 222}
+        - {x: -3.5, y: 157}
+        - {x: 2.5, y: 125}
+        - {x: -38.5, y: 225}
+        - {x: -68.5, y: 220}
+        - {x: -82.5, y: 210}
+        - {x: -93.5, y: 180}
+        - {x: -88.5, y: 140}
+        - {x: -67.5, y: 92}
+        - {x: -101.5, y: 62}
+        - {x: -125.5, y: 12}
+        - {x: -130.5, y: -38}
+        - {x: -130.5, y: -114}
+        - {x: -124.5, y: -135}
+        - {x: -88.5, y: -171}
+        - {x: -94.5, y: -212}
+        - {x: -80.5, y: -232}
+        - {x: -75.5, y: -234}
+        - {x: -39.5, y: -234}
+        - {x: -22.5, y: -215}
+        - {x: -29.5, y: -192}
+        - {x: 45.5, y: -191}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
