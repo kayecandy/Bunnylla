@@ -8,14 +8,18 @@ public class PlayerInputs : MonoBehaviour {
 
     private static Camera MainCamera;
 
-
+    private static Vector2 analogStickPosition;
     private static Vector2 touchInitialPosition;
 
     private static bool isEnabled = true;
 
+    private static AnalogController analogController;
+    private static ButtonsController buttonsController;
+
 	// Use this for initialization
 	void Start () {
-        
+        analogController = FindObjectOfType<AnalogController>();
+        buttonsController = FindObjectOfType<ButtonsController>();
 	}
 
     public static void SetMainCamera(Camera cam)
@@ -47,15 +51,9 @@ public class PlayerInputs : MonoBehaviour {
         if (!isEnabled)
             return 0;
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Stationary)
+        if (analogController.getPosition().x != 0)
         {
-            Vector3 bunnyLocation = MainCamera.WorldToScreenPoint(bunny.GetComponent<Transform>().position);
-            Vector2 touchLocation = Input.GetTouch(0).position;
-
-            if (touchLocation.x > bunnyLocation.x)
-                return 1;
-            else
-                return -1;
+            return analogController.getPosition().x;
         }
         else if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
@@ -70,10 +68,11 @@ public class PlayerInputs : MonoBehaviour {
         if (!isEnabled)
             return 0;
 
-        if (Input.touchCount== 1 && Input.GetTouch(0).phase == TouchPhase.Ended && Input.GetTouch(0).tapCount == 1)
+        if (Input.touchCount== 1 && Input.GetTouch(0).phase == TouchPhase.Ended && Input.GetTouch(0).tapCount == 1
+            && analogController.getPosition().x == 0 && analogController.getPosition().y == 0)
         {
-            Debug.Log("start: " + touchInitialPosition.x);
-            Debug.Log("end: " + Input.GetTouch(0).position.x);
+           // Debug.Log("start: " + touchInitialPosition.x);
+            //Debug.Log("end: " + Input.GetTouch(0).position.x);
 
             float xDistance = Input.GetTouch(0).position.x - touchInitialPosition.x;
 
@@ -104,14 +103,7 @@ public class PlayerInputs : MonoBehaviour {
         if (!isEnabled)
             return false;
 
-        if (Input.touchCount > 0 && Input.GetTouch(0).tapCount == 2)
-        {
-            for (int i = 0; i < Input.touchCount; i++)
-                if(Input.GetTouch(i).tapCount == 2)
-                    return true;
-        }
-
-        return Input.GetKeyDown(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space) || buttonsController.GetAButtonDown();
     }
 
     public static float GetClimbLadder()
@@ -119,12 +111,20 @@ public class PlayerInputs : MonoBehaviour {
         if (!isEnabled)
             return 0;
 
-        if (Input.GetKey(KeyCode.UpArrow))
-            return 1;
-        else if (Input.GetKey(KeyCode.DownArrow))
-            return -1;
+        if (analogController.getPosition().y != 0)
+        {
+            return analogController.getPosition().y;
+        }else if (!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        {
+            return Input.GetAxis("Vertical");
+        }
 
         return 0;
+    }
+
+    public static bool GetInteractWithObject()
+    {
+        return Input.GetKeyDown(KeyCode.Z) || buttonsController.GetIButtonDown();
     }
 
     public static bool GetToggleSwitch()
@@ -140,6 +140,11 @@ public class PlayerInputs : MonoBehaviour {
         return Input.GetKeyDown(KeyCode.Z);
     }
 
+    public static bool GetShowItems()
+    {
+        return Input.GetKeyDown(KeyCode.X);
+    }
+
     public static void enable()
     {
         isEnabled = true;
@@ -148,6 +153,12 @@ public class PlayerInputs : MonoBehaviour {
     public static void disable()
     {
         isEnabled = false;
+    }
+
+
+    public static void moveAnalog()
+    {
+        Debug.Log("moved");
     }
 
 }

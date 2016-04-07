@@ -2,6 +2,12 @@
 using System.Collections;
 
 public class LockController : MonoBehaviour {
+    /*
+     * GUIDELINES FOR GATE
+     *  - ONE BLOCK ON POSITION (0, 0)
+     *  - THE REST OF THE BLOCKS ON THE LOWER RIGHT SIDE OF THE (0,0)
+     */
+
 
     private GameObject key;
     private bool isLocked = true;

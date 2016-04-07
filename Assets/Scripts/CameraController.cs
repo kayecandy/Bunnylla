@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour {
 
+    private Camera cam;
+
     private int currentPlayerIndex;
     private PlayerController currentPlayer;
 	private PlayerController[] players;
@@ -12,6 +14,7 @@ public class CameraController : MonoBehaviour {
     private bool changeX = true;
     private bool changeY = true;
 
+
     public float MinX;
     public float MaxX;
     public float MinY;
@@ -19,13 +22,27 @@ public class CameraController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        cam = GetComponent<Camera>();
+
 		players = FindObjectsOfType<PlayerController>();
         currentPlayerIndex = 0;
 		currentPlayer = players[currentPlayerIndex];
         currentPlayer.activate();
 
 
-        PlayerInputs.SetMainCamera(this.GetComponent<Camera>());
+        PlayerInputs.SetMainCamera(cam);
+
+        float vertical = cam.orthographicSize;
+        float horizontal = vertical * cam.aspect;
+
+        MinX += horizontal;
+        MaxX -= horizontal;
+        MinY += vertical;
+        MaxY -= vertical;
+
+
+
+
 
 		//offset = transform.position - currentPlayer.transform.position;
 	}
@@ -83,7 +100,7 @@ public class CameraController : MonoBehaviour {
             {
                 if (newX > currentPlayer.transform.position.x && newX > MinX)
                     newX -= move;
-                else if (newX < currentPlayer.transform.position.x && newX < MaxY)
+                else if (newX < currentPlayer.transform.position.x && newX < MaxX)
                     newX += move; 
                 else
                     changeX = false;
@@ -107,6 +124,8 @@ public class CameraController : MonoBehaviour {
             {
                 changeY = false;
             }
+
+            //Debug.Log("newx: " + newX + "newy: " + newY);
 
 
         }

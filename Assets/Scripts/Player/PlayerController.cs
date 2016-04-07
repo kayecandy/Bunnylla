@@ -92,10 +92,8 @@ public class PlayerController : MonoBehaviour {
         float moveVertical = PlayerInputs.GetClimbLadder();
         //Debug.Log(moveVertical);
 
-        if (moveVertical > 0 && onLadder)
-            rb.velocity = new Vector2(rb.velocity.x, 1f);
-        else if (moveVertical < 0 && onLadder)
-            rb.velocity = new Vector2(rb.velocity.x, -1f);
+        if (moveVertical != 0 && onLadder)
+            rb.velocity = new Vector2(rb.velocity.x, moveVertical);
 
     }
 

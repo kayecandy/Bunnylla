@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SignController : MonoBehaviour {
+public class SignController : Interactable {
 
     public string message;
-
-    private bool isOnSign = false;
+    
     private bool isSignOpen = false;
 
     private PlayerController currentPlayer;
@@ -14,12 +13,10 @@ public class SignController : MonoBehaviour {
 	void Start () {
 	
 	}
-	
-	void FixedUpdate () {
-        //Debug.Log("isOnSign: " + isOnSign + " key: " + PlayerInputs.GetReadSign());
-        if (isOnSign && PlayerInputs.GetReadSign() && currentPlayer.getActive())
-        {
-            LevelManager l = FindObjectOfType<LevelManager>();
+
+    protected override void InteractPressed()
+    {
+        LevelManager l = FindObjectOfType<LevelManager>();
             if (!isSignOpen)
             {
                 l.openSign(message);
@@ -31,32 +28,8 @@ public class SignController : MonoBehaviour {
                 l.closeSign();
                 PlayerInputs.enable();
                 isSignOpen = false;
+
             }
-        }
-
-	}
-
-    void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.tag == "Player")
-        {
-            Debug.Log("sign enter");
-            isOnSign = true;
-            currentPlayer = col.GetComponent<PlayerController>();
-        }
-
-        
     }
 
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.tag == "Player")
-        {
-            Debug.Log("sign exit");
-            isOnSign = false;
-            currentPlayer = null;
-        }
-
-        
-    }
 }
