@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (col.gameObject.tag == "Ladder")
         {
-            Debug.Log("exit");
+            //Debug.Log("exit");
             //rb.isKinematic = false;
             rb.gravityScale = tempGravityScale;
             onLadder = false;

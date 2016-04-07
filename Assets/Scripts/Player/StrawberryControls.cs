@@ -57,14 +57,14 @@ public class StrawberryControls : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.tag == "Ground"){
-            Debug.Log("Collide Ground");
+            //Debug.Log("Collide Ground");
             isGrounded = true;
         }
     }
 
     void OnCollisionExit2D(Collision2D col){
         if(col.gameObject.tag == "Ground"){
-            Debug.Log("Exit Ground");
+            //Debug.Log("Exit Ground");
             isGrounded = false;
         }
     }

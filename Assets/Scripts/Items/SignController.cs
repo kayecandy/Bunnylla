@@ -17,19 +17,20 @@ public class SignController : Interactable {
     protected override void InteractPressed()
     {
         LevelManager l = FindObjectOfType<LevelManager>();
-            if (!isSignOpen)
-            {
-                l.openSign(message);
-                PlayerInputs.disable();
-                isSignOpen = true;
-            }
-            else
-            {
-                l.closeSign();
-                PlayerInputs.enable();
-                isSignOpen = false;
 
-            }
+        if (!isSignOpen)
+        {
+            l.openSign(message);
+            PlayerInputs.disable();
+            isSignOpen = true;
+        }
+        else
+        {
+            l.closeSign();
+            PlayerInputs.enable();
+            isSignOpen = false;
+
+        }
     }
 
 }

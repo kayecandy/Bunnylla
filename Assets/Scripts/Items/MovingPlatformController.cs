@@ -9,6 +9,7 @@ public class MovingPlatformController : MonoBehaviour {
     private float deltaPosition = 0.02f;
 
     private GameObject[] anchorPoints;
+    private GameObject chains;
 
     private float moveIndexX = 0.01f;
     private float moveIndexY = 0.01f;
@@ -26,8 +27,9 @@ public class MovingPlatformController : MonoBehaviour {
         targetPosition = getTarget();
 
         anchorPoints = getAnchorPoints();
+        chains = getChains();
 
-        Debug.Log(anchorPoints[0].transform.localPosition);
+        //Debug.Log(anchorPoints[0].transform.localPosition);
 
         if (targetPosition.x > startPosition.x)
             moveIndexX *= -1;
@@ -47,7 +49,7 @@ public class MovingPlatformController : MonoBehaviour {
         {
             delta.x = (1 - (targetDelta / 10)) * moveIndexX;
             delta.y = (1 - (targetDelta % 10)) * moveIndexY;
-            Debug.Log("on" + targetDelta);
+            Debug.Log("on target" + delta.y);
 
         }
         else if (!platformSwitch.isOn && startDelta != 11)
@@ -57,8 +59,18 @@ public class MovingPlatformController : MonoBehaviour {
             Debug.Log("off" + startDelta);
         }
 
-        anchorPoints[0].GetComponent<FixedJoint2D>().anchor += delta;
-        anchorPoints[1].GetComponent<FixedJoint2D>().anchor += delta;
+        //Debug.Log(anchorPoints[0].GetComponent<FixedJoint2D>().anchor);
+        //anchorPoints[0].GetComponent<FixedJoint2D>().anchor += new Vector2(delta.x, delta.y);
+        //anchorPoints[1].GetComponent<FixedJoint2D>().anchor += new Vector2(delta.x, delta.y);
+        anchorPoints[0].transform.localPosition -= new Vector3(delta.x, delta.y);
+        anchorPoints[1].transform.localPosition -= new Vector3(delta.x, delta.y);
+        //chains.transform.localPosition -= new Vector3(delta.x, delta.y);
+
+
+
+        //Debug.Log("anchor: " + anchorPoints[0].GetComponent<FixedJoint2D>().anchor);
+
+        
 
 	
 	}
@@ -85,6 +97,7 @@ public class MovingPlatformController : MonoBehaviour {
     {
         int value = 0;
         Vector3 anchor = anchorPoints[0].transform.localPosition;
+        //Vector3 anchor = chains.transform.localPosition;
         if( anchor.x > target.x - deltaPosition && anchor.x < target.x + deltaPosition)
             value += 10;
 
@@ -131,5 +144,16 @@ public class MovingPlatformController : MonoBehaviour {
         }
 
         return anchorPoints;
+    }
+
+    public GameObject getChains()
+    {
+        foreach (Transform child in transform)
+        {
+            if (child.name == "Chains")
+                return child.gameObject;
+        }
+
+        return null;
     }
 }

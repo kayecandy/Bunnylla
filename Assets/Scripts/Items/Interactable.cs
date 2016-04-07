@@ -7,7 +7,7 @@ public abstract class Interactable : MonoBehaviour {
     protected PlayerController collidedPlayer;
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	protected void FixedUpdate () {
 
         FixedUpdateEnter();
 
@@ -24,21 +24,21 @@ public abstract class Interactable : MonoBehaviour {
     protected virtual void FixedUpdateEnter() { }
     protected virtual void FixedUpdateExit() { }
 
-    void OnTriggerEnter2D(Collider2D col)
+    protected void OnTriggerEnter2D(Collider2D col)
     {
         if (col.tag == "Player")
         {
-            Debug.Log("Interactable enter");
+            //Debug.Log("Interactable enter");
             isCollidedWithPlayer = true;
             collidedPlayer = col.GetComponent<PlayerController>();
         }
     }
 
-    void OnTriggerExit2D(Collider2D col)
+    protected void OnTriggerExit2D(Collider2D col)
     {
         if (col.tag == "Player" && col.GetComponent<PlayerController>().Equals(collidedPlayer))
         {
-            Debug.Log("Interactable enter");
+            //Debug.Log("Interactable enter");
             isCollidedWithPlayer = false;
             collidedPlayer = null;
         }
