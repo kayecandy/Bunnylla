@@ -3,88 +3,81 @@ using System.Collections;
 
 public class MovingPlatformController : MonoBehaviour {
 
-    private SwitchController platformSwitch;
     private Vector3 targetPosition;
     private Vector3 startPosition;
-    private float deltaPosition = 0.02f;
+    private float deltaPosition;
 
-    private GameObject[] anchorPoints;
-    private GameObject chains;
+    private GameObject platform;
+    private MovingPlatformChildController platformController;
 
-    private float moveIndexX = 0.01f;
-    private float moveIndexY = 0.01f;
+    public float moveIndexX = 0.01f;
+    public float moveIndexY = 0.01f;
 
-    public enum State
+    private Target currentTarget;
+
+    public enum Target
     {
-        AtTarget, AtStart
+        TargetPosition, StartPosition
     }
-
 
 	// Use this for initialization
 	void Start () {
-        platformSwitch = getSwitch();
+
         startPosition = new Vector3(0, 0, 0);
         targetPosition = getTarget();
+        platform = getPlatform();
+        platformController = platform.GetComponent<MovingPlatformChildController>();
 
-        anchorPoints = getAnchorPoints();
-        chains = getChains();
+        deltaPosition = moveIndexX + moveIndexY;
 
-        //Debug.Log(anchorPoints[0].transform.localPosition);
-
-        if (targetPosition.x > startPosition.x)
+        if (targetPosition.x < startPosition.x)
             moveIndexX *= -1;
-        if (targetPosition.y > startPosition.y)
+        if (targetPosition.y < startPosition.y)
             moveIndexY *= -1;
+
+        currentTarget = Target.TargetPosition;
+
+        
+	
 	}
 	
 	// Update is called once per frame
-	void Update () {
-        //Debug.Log(platformSwitch.isOn);
-        Vector2 delta = new Vector2(0,0);
+	void FixedUpdate () {
+        Vector3 delta = new Vector3(0, 0);
 
         int startDelta = isWithinDelta(startPosition);
         int targetDelta = isWithinDelta(targetPosition);
 
-        if (platformSwitch.isOn && targetDelta != 11)
+        if (currentTarget == Target.TargetPosition)
         {
-            delta.x = (1 - (targetDelta / 10)) * moveIndexX;
-            delta.y = (1 - (targetDelta % 10)) * moveIndexY;
-            Debug.Log("on target" + delta.y);
+            if (targetDelta != 11)
+            {
+                delta.x = (1 - (targetDelta / 10)) * moveIndexX;
+                delta.y = (1 - (targetDelta % 10)) * moveIndexY;
+            }
+            else
+            {
+                currentTarget = Target.StartPosition;
+            }
 
         }
-        else if (!platformSwitch.isOn && startDelta != 11)
+        else if (currentTarget == Target.StartPosition)
         {
-            delta.x = (1 - (startDelta / 10)) * -moveIndexX;
-            delta.y = (1 - (startDelta % 10)) * -moveIndexY;
-            Debug.Log("off" + startDelta);
+            if (startDelta != 11)
+            {
+                delta.x = (1 - (startDelta / 10)) * -moveIndexX;
+                delta.y = (1 - (startDelta % 10)) * -moveIndexY;
+            }
+            else
+            {
+                currentTarget = Target.TargetPosition;
+            }
         }
 
-        //Debug.Log(anchorPoints[0].GetComponent<FixedJoint2D>().anchor);
-        //anchorPoints[0].GetComponent<FixedJoint2D>().anchor += new Vector2(delta.x, delta.y);
-        //anchorPoints[1].GetComponent<FixedJoint2D>().anchor += new Vector2(delta.x, delta.y);
-        anchorPoints[0].transform.localPosition -= new Vector3(delta.x, delta.y);
-        anchorPoints[1].transform.localPosition -= new Vector3(delta.x, delta.y);
-        //chains.transform.localPosition -= new Vector3(delta.x, delta.y);
+        platform.transform.localPosition += delta;
+        platformController.syncPlayerLocations(delta);
 
-
-
-        //Debug.Log("anchor: " + anchorPoints[0].GetComponent<FixedJoint2D>().anchor);
-
-        
-
-	
 	}
-
-    private SwitchController getSwitch()
-    {
-        foreach (Transform child in transform)
-        {
-            if (child.tag == "Switch")
-                return child.GetComponent<SwitchController>();
-        }
-
-        return null;
-    }
 
     /*
      * RETURN VALUES
@@ -96,9 +89,9 @@ public class MovingPlatformController : MonoBehaviour {
     private int isWithinDelta(Vector3 target)
     {
         int value = 0;
-        Vector3 anchor = anchorPoints[0].transform.localPosition;
+        Vector3 anchor = platform.transform.localPosition;
         //Vector3 anchor = chains.transform.localPosition;
-        if( anchor.x > target.x - deltaPosition && anchor.x < target.x + deltaPosition)
+        if (anchor.x > target.x - deltaPosition && anchor.x < target.x + deltaPosition)
             value += 10;
 
         if (anchor.y > target.y - deltaPosition && anchor.y < target.y + deltaPosition)
@@ -120,38 +113,14 @@ public class MovingPlatformController : MonoBehaviour {
         return new Vector3();
     }
 
-    private GameObject[] getAnchorPoints()
+    private GameObject getPlatform()
     {
-        GameObject[] anchorPoints = new GameObject[2];
-        int i=0;
         foreach (Transform child in transform)
         {
-            if (child.name == "Chains")
+            if (child.name == "Platform")
             {
-                foreach (Transform chain in child.transform)
-                {
-                    foreach (Transform link in chain.transform)
-                    {
-                        if (link.tag == "AnchorPoint")
-                        {
-                            anchorPoints[i] = link.gameObject;
-                            i++;
-                        }
-                    }
-                }
-            }
-           
-        }
-
-        return anchorPoints;
-    }
-
-    public GameObject getChains()
-    {
-        foreach (Transform child in transform)
-        {
-            if (child.name == "Chains")
                 return child.gameObject;
+            }
         }
 
         return null;
