@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ExitSignController : SignController {
 
     public const int PLAYER_NUM = 3;
     private ArrayList players;
+
+    public string nextLevelName;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +21,8 @@ public class ExitSignController : SignController {
         if (players.Count == PLAYER_NUM)
         {
             Debug.Log("exited");
+
+            SceneManager.LoadScene(nextLevelName);
         }else
             base.InteractPressed();
     }

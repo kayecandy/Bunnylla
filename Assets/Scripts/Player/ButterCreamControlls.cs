@@ -8,7 +8,7 @@ public class ButterCreamControlls : MonoBehaviour {
     private bool isSmall = false;
 
     private Vector3 normalScale;
-    public Vector3 smallScale = new Vector3(0.13f, 0.13f, 0.13f);
+    public Vector3 smallScale = new Vector3(0.1f, 0.1f, 0.1f);
 
 
 
@@ -22,7 +22,7 @@ public class ButterCreamControlls : MonoBehaviour {
 
     void FixedUpdate()
     {
-        if (PlayerInputs.GetDoAction())
+        if (PlayerInputs.GetDoAction() && GetComponent<PlayerController>().getActive())
         {
             if (isSmall)
             {
